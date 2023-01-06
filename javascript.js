@@ -63,6 +63,10 @@ function storeNumber(number) {
     return number;
 }
 
+// When user click the clear button
+const clearKey = document.querySelector('.clear-button');
+clearKey.addEventListener('click', reset);
+
 // When user click the equal button
 const equalKey = document.querySelector('.equal-button');
 equalKey.addEventListener('click', equalClick);
