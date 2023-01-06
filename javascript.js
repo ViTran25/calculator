@@ -63,10 +63,7 @@ function storeNumber(number) {
 
 // When user click the equal button
 const equalKey = document.querySelector('.equal-button');
-equalKey.addEventListener('click', function(e) {
-    // Add the last number to the input array
-    currentNumber = storeNumber(currentNumber);
-})
+equalKey.addEventListener('click', equalClick);
 
 // This function will iterate through the input array and execute
 // any operator that matches the given operators
@@ -78,4 +75,26 @@ function calculateByOperators(inputs, ...operators) {
           i--;  
         }
     }
+}
+
+// Click even for equal '=' button
+function equalClick(e) {
+    // Add the last number to the input array
+    currentNumber = storeNumber(currentNumber);
+    // Check only one input
+    // Check the syntax of the input
+
+    // Calculate the multiply and divide operators first
+    calculateByOperators(userInput, 'x', '/');
+    // Calculate the add and subtract operators later
+    calculateByOperators(userInput, '+', '-');
+
+    // Round up the result to 4 decimals
+    let result = userInput[0];
+    if (result % 1 !== 0) {
+        result = result.toFixed(4);
+    }
+    
+    // Display the result
+    display.textContent = result;
 }
