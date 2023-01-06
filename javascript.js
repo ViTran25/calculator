@@ -51,6 +51,7 @@ function inputDigit(e) {
     currentNumber += e.target.id;
 }
 function inputOperator(e) {
+    if (finish) finish = false;
     display.textContent += e.target.id;
     currentNumber = storeNumber(currentNumber);
     userInput.push(e.target.id);
