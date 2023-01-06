@@ -49,9 +49,22 @@ function inputDigit(e) {
 }
 function inputOperator(e) {
     display.textContent += e.target.id;
-    if (currentNumber != '') {
-        userInput.push(Number(currentNumber));
-        currentNumber = '';
-    }
+    currentNumber = storeNumber(currentNumber);
     userInput.push(e.target.id);
 }
+
+function storeNumber(number) {
+    if (number != '') {
+        userInput.push(Number(number));
+        number = '';
+    }
+    return number;
+}
+
+// When user click the equal button
+const equalKey = document.querySelector('.equal-button');
+equalKey.addEventListener('click', function(e) {
+    currentNumber = storeNumber(currentNumber);
+    console.table(userInput);
+    console.log(currentNumber);
+})
