@@ -32,6 +32,8 @@ function operate(a, b, operator) {
 let currentNumber = '';
 let userInput = [];
 
+let finish = false;
+
 /*Create the functions that populate the display 
 when the user click the number buttons*/ 
 const display = document.querySelector('.display-screen');
@@ -79,22 +81,31 @@ function calculateByOperators(inputs, ...operators) {
 
 // Click even for equal '=' button
 function equalClick(e) {
-    // Add the last number to the input array
-    currentNumber = storeNumber(currentNumber);
-    // Check only one input
-    // Check the syntax of the input
+    if (!finish) {
+        // Add the last number to the input array
+        currentNumber = storeNumber(currentNumber);
+        // Check only one input
+        // Check the syntax of the input
 
-    // Calculate the multiply and divide operators first
-    calculateByOperators(userInput, 'x', '/');
-    // Calculate the add and subtract operators later
-    calculateByOperators(userInput, '+', '-');
+        // Calculate the multiply and divide operators first
+        calculateByOperators(userInput, 'x', '/');
+        // Calculate the add and subtract operators later
+        calculateByOperators(userInput, '+', '-');
 
-    // Round up the result to 4 decimals
-    let result = userInput[0];
-    if (result % 1 !== 0) {
-        result = result.toFixed(4);
+        // Round up the result to 4 decimals
+        let result = userInput[0];
+        if (result % 1 !== 0) {
+            result = result.toFixed(4);
+        }
+
+        // Display the result
+        display.textContent = result;
+        finish = true;
     }
-    
-    // Display the result
-    display.textContent = result;
+}
+
+function reset() {
+    userInput = [];
+    display.textContent = '';
+    finish = false;
 }
