@@ -46,11 +46,13 @@ operators.forEach(operator =>
     operator.addEventListener('click', inputOperator))
 
 function inputDigit(e) {
-    if (finish) reset();
+    if (finish || display.textContent === 'INVALID') reset();
     display.textContent += e.target.id;
     currentNumber += e.target.id;
 }
 function inputOperator(e) {
+    if (display.textContent === 'INVALID' ||
+        display.textContent === 'NaN') reset();
     if (finish) finish = false;
     display.textContent += e.target.id;
     currentNumber = storeNumber(currentNumber);
@@ -91,8 +93,18 @@ function equalClick(e) {
         // Add the last number to the input array
         currentNumber = storeNumber(currentNumber);
         // Check only one input
+        if (userInput.length === 1 &&
+            typeof userInput[0] != 'number') {
+            reset();
+            return;
+        }
         // Check the syntax of the input
-
+        if (!checkSyntax()) {
+            currentNumber = '';
+            userInput = []; 
+            display.textContent = 'INVALID';
+            return;
+        }
         // Calculate the multiply and divide operators first
         calculateByOperators(userInput, 'x', '/');
         // Calculate the add and subtract operators later
@@ -115,4 +127,43 @@ function reset() {
     userInput = [];
     display.textContent = '';
     finish = false;
+}
+
+function checkSyntax() {
+    const length = userInput.length;
+    if (typeof userInput[length-1] !== 'number')
+        return false;
+    if (userInput[0] === 'x' || userInput[0] === '/')
+        return false;
+    if (userInput[0] === '+' || userInput[0] === '-') 
+        userInput.unshift(0);
+    for (let i=1; i< userInput.length-1; i++) {
+        if (typeof userInput[i-1] !== 'number'
+        &&  typeof userInput[i] !== 'number'
+        &&  typeof userInput[i+1] !== 'number')
+            return false;
+    }
+    for (let i=0; i<userInput.length-1; i++) {
+        if (userInput[i] === '+'){
+            if (userInput[i+1] === 'x' || userInput[i+1] === '/') 
+                return false;
+            if (userInput[i+1] === '-' || userInput[i+1] === '+'){
+                userInput.splice(i,1);
+                i--;
+            }
+        }
+        if (userInput[i] === '-'){
+            if (userInput[i+1] === 'x' || userInput[i+1] === '/') 
+                return false;
+            if (userInput[i+1] === '-'){
+                userInput.splice(i,2, '+');
+                i--;
+            }
+            if (userInput[i+1] === '+'){
+                userInput.splice(i+1, 1);
+                i--;
+            }
+        }
+    }
+    return true;
 }
