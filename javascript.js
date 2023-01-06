@@ -25,3 +25,21 @@ function operate(a, b, operator) {
     }
     return result;
 }
+
+/*Create the functions that populate the display 
+when the user click the number buttons*/ 
+const display = document.querySelector('.display-screen');
+
+const digits = document.querySelectorAll('.digit');
+digits.forEach(digit => digit.addEventListener('click', inputDigit));
+
+const operators = document.querySelectorAll('.operator');
+operators.forEach(operator => 
+    operator.addEventListener('click', inputOperator))
+
+function inputDigit(e) {
+    display.textContent += e.target.id;
+}
+function inputOperator(e) {
+    display.textContent += e.target.id;
+}
