@@ -46,6 +46,7 @@ operators.forEach(operator =>
     operator.addEventListener('click', inputOperator))
 
 function inputDigit(e) {
+    if (finish) reset();
     display.textContent += e.target.id;
     currentNumber += e.target.id;
 }
