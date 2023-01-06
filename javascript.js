@@ -46,13 +46,12 @@ operators.forEach(operator =>
     operator.addEventListener('click', inputOperator))
 
 function inputDigit(e) {
-    if (finish || display.textContent === 'INVALID') reset();
+    if (finish) reset();
     display.textContent += e.target.id;
     currentNumber += e.target.id;
 }
 function inputOperator(e) {
-    if (display.textContent === 'INVALID' ||
-        display.textContent === 'NaN') reset();
+    if (display.textContent === 'NaN') reset();
     if (finish) finish = false;
     display.textContent += e.target.id;
     currentNumber = storeNumber(currentNumber);
@@ -102,7 +101,8 @@ function equalClick(e) {
         if (!checkSyntax()) {
             currentNumber = '';
             userInput = []; 
-            display.textContent = 'INVALID';
+            display.textContent = 'NaN';
+            finish = true;
             return;
         }
         // Calculate the multiply and divide operators first
