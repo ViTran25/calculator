@@ -26,6 +26,12 @@ function operate(a, b, operator) {
     return result;
 }
 
+// Create variables to store the input.
+// Each number and operator will be stored in 
+// the array by the user's click order.
+let currentNumber = '';
+let userInput = [];
+
 /*Create the functions that populate the display 
 when the user click the number buttons*/ 
 const display = document.querySelector('.display-screen');
@@ -39,7 +45,13 @@ operators.forEach(operator =>
 
 function inputDigit(e) {
     display.textContent += e.target.id;
+    currentNumber += e.target.id;
 }
 function inputOperator(e) {
     display.textContent += e.target.id;
+    if (currentNumber != '') {
+        userInput.push(Number(currentNumber));
+        currentNumber = '';
+    }
+    userInput.push(e.target.id);
 }
