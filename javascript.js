@@ -52,7 +52,7 @@ function inputOperator(e) {
     currentNumber = storeNumber(currentNumber);
     userInput.push(e.target.id);
 }
-
+// Function to push number to array
 function storeNumber(number) {
     if (number != '') {
         userInput.push(Number(number));
@@ -64,7 +64,18 @@ function storeNumber(number) {
 // When user click the equal button
 const equalKey = document.querySelector('.equal-button');
 equalKey.addEventListener('click', function(e) {
+    // Add the last number to the input array
     currentNumber = storeNumber(currentNumber);
-    console.table(userInput);
-    console.log(currentNumber);
 })
+
+// This function will iterate through the input array and execute
+// any operator that matches the given operators
+function calculateByOperators(inputs, ...operators) {
+    for (let i=0; i< inputs.length; i++) {
+        if (operators.includes(inputs[i])) {
+          const result = operate(inputs[i-1], inputs[i+1], inputs[i]);
+          inputs.splice(i-1, 3, result);
+          i--;  
+        }
+    }
+}
