@@ -109,6 +109,7 @@ function equalClick(e) {
 }
 
 function reset() {
+    currentNumber = '';
     userInput = [];
     display.textContent = '';
     finish = false;
