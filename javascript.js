@@ -66,6 +66,14 @@ function storeNumber(number) {
     return number;
 }
 
+// When user click the decimal point button
+const decimalPoint = document.querySelector('.decimal-point');
+decimalPoint.addEventListener('click', function(e) {
+    if (finish) reset();
+    currentNumber += '.';
+    display.textContent += '.';
+})
+
 // When user click the clear button
 const clearKey = document.querySelector('.clear-button');
 clearKey.addEventListener('click', reset);
