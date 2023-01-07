@@ -175,3 +175,17 @@ function checkSyntax() {
     }
     return true;
 }
+
+// Create effects for buttons with mouse
+const buttons = document.querySelectorAll('button');
+console.log(buttons);
+// On mouse-hovering event
+buttons.forEach(button => button.addEventListener('mouseenter', 
+() => button.classList.add('hover')));
+buttons.forEach(button => button.addEventListener('mouseleave', 
+() => button.classList.remove('hover')));
+// On mouse-click event
+buttons.forEach(button => button.addEventListener('mousedown', 
+() => button.classList.add('click')));
+buttons.forEach(button => button.addEventListener('mouseup', 
+() => button.classList.remove('click')));

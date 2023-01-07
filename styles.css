@@ -49,6 +49,18 @@ button {
     background-color: yellow;
 }
 
+.button-number > .hover,
+.button-number > .hover,
+.button-action > .hover {
+    filter: brightness(95%);
+}
+
+.button-number > .click,
+.button-number > .click,
+.button-action > .click {
+    filter: brightness(90%);
+}
+
 /*Display screen*/
 .display-container {
     width: 520px;
