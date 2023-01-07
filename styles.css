@@ -67,3 +67,23 @@ button {
     font-weight: 600;
     font-family: sans-serif;
 }
+
+/*Footer*/
+.footer {
+    background-color: #E5E7EB;
+    color: black;
+    padding: 10px 0;
+    margin-top: 30px;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.footer-text {
+    font-size: 20px;
+}
+.github-logo {
+    max-width: 50px;
+    max-height: 50px;
+}
