@@ -121,7 +121,7 @@ function equalClick(e) {
         // Round up the result to 4 decimals
         let result = userInput[0];
         if (result % 1 !== 0) {
-            result = result.toFixed(4);
+            result = Math.round(result * 10000) / 10000;
         }
 
         // Display the result
